@@ -1,0 +1,20 @@
+<div class="login" fxLayout="row">
+    <form [formGroup]="authn" (ngSubmit)="attemptLogin()"
+            fxLayout="column" fxLayoutAlign="space-around stretch" fxLayoutGap="20px"
+            fxFlex.lt-sm="100" fxFlexOffset.lt-sm="0"
+            fxFlex.sm="50" fxFlexOffset.sm="25"
+            fxFlex.gt-sm="50" fxFlexOffset.gt-sm="25">
+
+
+        <!-- Value: {{authn.value | json}} -->
+        <mat-form-field>
+            <input matInput placeholder="Username" formControlName="username">
+            <mat-error *ngIf="username.invalid && username.touched">Please enter your username.</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Password" formControlName="password" type="password">
+            <mat-error *ngIf="password.invalid && password.touched">Please enter your password</mat-error>
+        </mat-form-field>
+        <button mat-raised-button color="primary" type="submit" [disabled]="authn.invalid">Log in</button>
+    </form>
+</div>
