@@ -1,7 +1,8 @@
 import { Component, ChangeDetectorRef } from '@angular/core';
 import { Observable } from 'rxjs';
 import { MediaObserver } from '@angular/flex-layout';
-import { map, share, tap } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
+import { LoginService } from '../services/login.service';
 
 @Component({
   selector: 'main-nav',
@@ -21,6 +22,9 @@ export class MainNavComponent {
   );
     
 
-  constructor(private media: MediaObserver, private changeDetectorRef: ChangeDetectorRef) {}
+  constructor(
+    private media: MediaObserver,
+    private changeDetectorRef: ChangeDetectorRef,
+    public loginService: LoginService) {}
 
 }

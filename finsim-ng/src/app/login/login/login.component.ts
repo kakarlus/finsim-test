@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LoginService } from 'src/app/services/login.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'login',
@@ -10,13 +11,18 @@ import { LoginService } from 'src/app/services/login.service';
 export class LoginComponent implements OnInit {
 
   authn: FormGroup;
-  constructor(private fb: FormBuilder, private loginService: LoginService) { }
+  constructor(
+    private fb: FormBuilder,
+    private loginService: LoginService,
+    private router: Router) { }
 
   ngOnInit() {
     this.authn = this.fb.group({
       username: ['', Validators.required],
       password: ['', Validators.required]
     })
+
+    this.loginService.logout();
   }
 
   get username() {
@@ -28,9 +34,9 @@ export class LoginComponent implements OnInit {
   }
 
   attemptLogin() {
-    console.log('wkekeke');
-    this.loginService.login().subscribe( (res) => {
-      console.log(res);
+    this.loginService.login().subscribe((res) => {
+      this.loginService.setToken(res);
+      this.router.navigate(['investments']);
     })
   }
 

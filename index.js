@@ -1,9 +1,11 @@
 "use strict";
 const express = require("express");
 const compression = require("compression");
+const https = require('https')
+const fs = require('fs')
 
 const _port = 4100;
-const _app_folder = '../finsim-ng/dist/finsim-ng';
+const _app_folder = './finsim-ng/dist/finsim-ng';
 
 const app = express();
 app.use(compression());
@@ -21,3 +23,11 @@ app.all('*', function (req, res) {
 app.listen(_port, function () {
     console.log("Node Express server for " + app.name + " listening on http://localhost:" + _port);
 });
+
+/* const httpsOptions = {
+    key: fs.readFileSync('./certs/key.pem'),
+    cert: fs.readFileSync('./certs/cert.pem')
+}
+const server = https.createServer(httpsOptions, app).listen(_port, () => {
+    console.log('server running at ' + _port)
+}) */
