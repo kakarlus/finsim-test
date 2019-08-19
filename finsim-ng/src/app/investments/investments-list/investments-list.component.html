@@ -1,1 +1,40 @@
-<p>investments-list works!</p>
+<div class="filters" fxLayout="row" fxLayoutAlign="end center" fxLayoutAlign.xs="start center">
+    <button matTooltip="Sort" [matTooltipPosition]="'above'" mat-stroked-button (click)="order='InvestmentName'; isOrderReversed = !isOrderReversed">
+      <mat-icon *ngIf="order==='InvestmentName' && !isOrderReversed">arrow_downward</mat-icon>
+      <mat-icon *ngIf="order==='InvestmentName' && isOrderReversed">arrow_upward</mat-icon>Name
+    </button>
+    <button matTooltip="Sort" [matTooltipPosition]="'above'" mat-stroked-button (click)="order='Price'; isOrderReversed = !isOrderReversed">
+      <mat-icon *ngIf="order==='Price' && !isOrderReversed">arrow_downward</mat-icon>
+      <mat-icon *ngIf="order==='Price' && isOrderReversed">arrow_upward</mat-icon>Price
+    </button>
+    <mat-form-field>
+      <input matInput (keyup)="filter($event.target.value)" placeholder="Filter">
+    </mat-form-field>
+</div>
+
+<div class="progress" *ngIf="investments.length === 0" fxFill fxLayout="row" fxLayoutAlign="center center">
+  <mat-spinner></mat-spinner>
+</div>
+
+<div class="investment-list">
+  <div class="investment" fxLayout="row wrap" fxLayoutAlign="start stretch">
+    <div class="investment__card-wrapper" *ngFor="let investment of filteredInvestments | orderBy: order : isOrderReversed"
+        fxFlex.lt-sm="100"
+        fxFlex.sm="50"
+        fxFlex.md="33"
+        fxFlex.gt-md="25">
+
+      <mat-card>
+        <mat-card-header>
+          <div mat-card-avatar class="investment__image"></div>
+          <mat-card-title>{{investment.InvestmentName}}</mat-card-title>
+          <mat-card-subtitle>{{investment.Market}}: {{investment.InvestmentCode}}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <p class="investment__price"><span>worth </span>{{investment.Price | currency: investment.Currency}}</p>
+          <p class="investment__price-date"><span>As of </span>{{investment.PriceUpdatedUtc | date: 'medium'}}</p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>

@@ -6,11 +6,18 @@ import { Router } from '@angular/router';
 @Injectable({
   providedIn: 'root'
 })
-export class InvestmentsService {
-
+export class InvestorsService {
+  
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type':  'application/x-www-form-urlencoded',
+    })
+  };
+  
   constructor(private httpClient: HttpClient, private router: Router) { }
-
-  getInvestments() {
-    return this.httpClient.get('http://localhost:4101/Investments');
+  
+  getInvestors() {
+    return this.httpClient.get('http://localhost:4101/Investors');
   }
 }
+

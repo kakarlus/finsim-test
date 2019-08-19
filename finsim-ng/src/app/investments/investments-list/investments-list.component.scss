@@ -1,0 +1,44 @@
+.filters {
+  padding: 10px 10px 0;
+  button, .mat-form-field {
+    margin-right: 10px;
+  }
+  .mat-icon {
+    margin-right: 5px;
+  }
+}
+
+.investment-list {
+  padding: 10px;
+  
+  .investment {
+    .mat-card-title {
+      font-size: 18px;
+    }
+    span {
+      font-weight: normal;
+      font-size: 12px;
+      color: #666666;
+    }
+    &__card-wrapper {
+      padding: 10px;
+    }
+    &__image {
+      background-color: #cccccc;
+      border-radius: 50%;
+    }
+    &__price {
+      font-weight: bold;
+      margin-bottom: 5px;
+      font-size: 26px;
+      color: #333333;
+      text-align: right;
+      
+    }
+    &__price-date {
+      margin-top: 0;
+      color: #666666;
+      text-align: right;
+    }
+  }
+}

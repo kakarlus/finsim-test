@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, NgForm } from '@angular/forms';
 import { LoginService } from 'src/app/services/login.service';
 import { Router } from '@angular/router';
 
@@ -10,14 +10,17 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  authn: FormGroup;
+  authnFormGroup: FormGroup;
+  isAttemptingLogin = false;
+  loginError: Object;
+
   constructor(
     private fb: FormBuilder,
     private loginService: LoginService,
     private router: Router) { }
 
   ngOnInit() {
-    this.authn = this.fb.group({
+    this.authnFormGroup = this.fb.group({
       username: ['', Validators.required],
       password: ['', Validators.required]
     })
@@ -26,18 +29,26 @@ export class LoginComponent implements OnInit {
   }
 
   get username() {
-    return this.authn.get('username');
+    return this.authnFormGroup.get('username');
   }
 
   get password() {
-    return this.authn.get('password');
+    return this.authnFormGroup.get('password');
   }
 
-  attemptLogin() {
-    this.loginService.login().subscribe((res) => {
-      this.loginService.setToken(res);
-      this.router.navigate(['investments']);
-    })
+  attemptLogin(loginForm: NgForm) {
+    this.isAttemptingLogin = true;
+    this.loginError = null;
+    this.loginService.login(loginForm.value).subscribe(
+      (res) => {
+        this.loginService.setToken(res['access_token']);
+        this.router.navigate(['investments']);
+      },
+      (err) => {
+        this.isAttemptingLogin = false;
+        this.loginError = err.error;
+      }
+    )
   }
 
 }

@@ -1,1 +1,46 @@
-<p>investors-list works!</p>
+<div class="filters" fxLayout="row" fxLayoutAlign="end center" fxLayoutAlign.xs="start center">
+    <button matTooltip="Sort" [matTooltipPosition]="'left'" mat-stroked-button (click)="order='FullName'; isOrderReversed = !isOrderReversed">
+      <mat-icon *ngIf="order==='FullName' && !isOrderReversed">arrow_downward</mat-icon>
+      <mat-icon *ngIf="order==='FullName' && isOrderReversed">arrow_upward</mat-icon>Name
+    </button>
+    <mat-form-field>
+      <input matInput (keyup)="filter($event.target.value)" placeholder="Filter">
+    </mat-form-field>
+</div>
+
+<div class="progress" *ngIf="investors.length === 0" fxFill fxLayout="row" fxLayoutAlign="center center">
+  <mat-spinner></mat-spinner>
+</div>
+
+<div class="investor-list">
+  <div class="investor" fxLayout="row wrap" fxLayoutAlign="start stretch">
+    <div class="investor__card-wrapper" *ngFor="let investor of filteredInvestors | orderBy: order : isOrderReversed"
+        fxFlex.lt-sm="100"
+        fxFlex.sm="50"
+        fxFlex.gt-sm="33">
+    
+    <mat-card>
+      <mat-card-header>
+        <div mat-card-avatar class="investor__image"></div>
+        <mat-card-title>{{investor.FullName}}</mat-card-title>
+        <mat-card-subtitle>{{investor.PhoneNumber}}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <h4>Accounts</h4>
+        <mat-list fxLayout="column">
+          <mat-list-item *ngFor="let account of investor.Accounts; last as last" class="investor__accounts">
+            <div class="name" mat-line>
+              {{account.AccountName}}<span> ({{account.AccountCode}})</span>
+            </div>
+            <div class="available-cash" mat-line>
+              <span>has</span> {{account.AvailableCash | currency: account.LocalCurrency}}
+              <mat-icon matTooltip="Edit Holdings" (click)="editHoldings(account.Holdings)" aria-label="Side nav toggle icon">edit</mat-icon>
+            </div>
+            <mat-divider [inset]="true" *ngIf="!last"></mat-divider>
+          </mat-list-item>
+        </mat-list>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  
+</div>

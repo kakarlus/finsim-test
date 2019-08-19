@@ -9,21 +9,33 @@ import { Investment } from '../investment';
 })
 export class InvestmentsListComponent implements OnInit {
 
+  investments: Investment[];
+  filteredInvestments: Investment[];
+  order = '';
+  isOrderReversed = true;
+
   constructor(
-    private investmentsService: InvestmentsService,
-    // private investments: Investment[]
-    ) { }
+      private investmentsService: InvestmentsService) {
+    this.investments = new Array<Investment>();
+  }
 
   ngOnInit() {
     this.getInvestments();
   }
 
   getInvestments() {
-    this.investmentsService.getInvestments().subscribe(res => {
-      console.log('wakekeke');
-      console.log(res);
-      // this.investments = res;
+    this.investmentsService.getInvestments().subscribe((res: Investment[]) => {
+      this.investments = res;
+      this.filteredInvestments = res;
     })
+  }
+
+  filter(val: string) {
+    this.filteredInvestments = this.investments.filter(investment => 
+      investment.InvestmentName.toLowerCase().includes(val.toLowerCase()) ||
+      investment.InvestmentCode.toLowerCase().includes(val.toLowerCase()) ||
+      investment.Market.toLowerCase().includes(val.toLowerCase())
+    )
   }
 
 }
