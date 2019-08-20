@@ -15,6 +15,6 @@
     </mat-form-field>
 
     <button mat-raised-button color="primary" type="submit" [disabled]="authnFormGroup.invalid || isAttemptingLogin">Log in</button>
-    <mat-error *ngIf="loginError">{{loginError.error_description}}</mat-error>
+    <mat-error *ngIf="loginError">{{loginError['error_description']}}</mat-error>
   </form>
 </div>
