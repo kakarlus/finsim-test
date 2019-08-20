@@ -34,7 +34,7 @@
             </div>
             <div class="available-cash" mat-line>
               <span>has</span> {{account.AvailableCash | currency: account.LocalCurrency}}
-              <mat-icon matTooltip="Edit Holdings" (click)="editHoldings(account.Holdings)" aria-label="Side nav toggle icon">edit</mat-icon>
+              <mat-icon matTooltip="View Account" (click)="viewHoldings(investor, account)" aria-label="Side nav toggle icon">visibility</mat-icon>
             </div>
             <mat-divider [inset]="true" *ngIf="!last"></mat-divider>
           </mat-list-item>

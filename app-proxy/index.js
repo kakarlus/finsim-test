@@ -29,7 +29,7 @@ app.post('/Token', function(req, res) {
   }).catch(err => {
     console.log(err.response.data);
     return res.status(400).json(err.response.data);
-  })
+  });
 });
 
 app.get('/Investments', function(req, res) {
@@ -61,6 +61,24 @@ app.get('/Investors', function(req, res) {
     return res.status(400).json(err.response.data);
   })
 });
+
+app.post('/Investors', function(req, res) {
+  const authorization = req.headers.authorization;
+  const config = {
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }
+  
+  axios.post('https://finsimtestwebapi.azurewebsites.net/api/Investors', 
+    JSON.stringify(req.body), config).then(rs => {
+      return res.status(200).json(rs.data);
+    }).catch(err => {
+      console.log(err.response.data);
+      return res.status(400).json(err.response.data);
+    }
+  );
+})
 
 // start node server
 app.listen(_port, function () {

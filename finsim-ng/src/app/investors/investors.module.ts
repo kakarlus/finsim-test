@@ -16,8 +16,12 @@ import { MatInputModule } from '@angular/material/input';
 import { InvestorSortPipe } from './investor-sort.pipe';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { OrderModule } from 'ngx-order-pipe';
+import { MatDividerModule } from '@angular/material/divider';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptorService } from '../services/token-interceptor.service';
+import { InvestmentsService } from '../services/investments/investments.service';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -38,9 +42,13 @@ import { TokenInterceptorService } from '../services/token-interceptor.service';
     MatFormFieldModule,
     MatInputModule,
     OrderModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatDividerModule,
+    MatAutocompleteModule,
+    ReactiveFormsModule
   ],
   providers: [
+    InvestmentsService,
     InvestorsService,
     {
       provide: HTTP_INTERCEPTORS,

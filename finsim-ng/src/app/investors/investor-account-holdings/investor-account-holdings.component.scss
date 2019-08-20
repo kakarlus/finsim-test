@@ -1,0 +1,32 @@
+.investor-account-holdings {
+  h3, h4 {
+    margin: 0;
+  }
+
+  span {
+    font-size: 14px;
+    color: #666666;
+  }
+
+  .holdings {
+    .header {
+      padding-bottom: 30px;
+      h3 {
+        float: left;
+      }
+      .mat-icon {
+        cursor: pointer;
+        float: right;
+      }
+    }
+    .mat-form-field {
+      width: 100%;
+    }
+    .mat-divider {
+      margin-top: 15px;
+    }
+    .clearfix {
+      clear: both;
+    }
+  }
+}

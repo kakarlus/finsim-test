@@ -34,10 +34,13 @@ export class InvestorsListComponent implements OnInit {
     })
   }
 
-  editHoldings(holdings: Holding[]) {
+  viewHoldings(investor: Investor, account: Account) {
     const dialogRef = this.dialog.open(InvestorAccountHoldingsDialog, {
-      width: '250px',
-      data: holdings
+      width: '320px',
+      data: {
+        investor,
+        account
+      }
     });
 
     dialogRef.afterClosed().subscribe(result => {

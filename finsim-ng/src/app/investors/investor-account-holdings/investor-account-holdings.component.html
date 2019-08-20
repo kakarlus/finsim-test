@@ -1,8 +1,59 @@
 <div class="investor-account-holdings">
-  <div *ngFor="let holding of data">
-    {{holding.InvestmentCode}}
-    {{holding.Price}}
-    {{holding.Units}}
-    {{holding.PurchaseDateUtc}}
+  <div class="details">
+    <h3>
+      Account
+    </h3>
+    <h4>
+      {{data['account'].AccountName}}<span>&nbsp;({{data['account'].AccountCode}})</span>
+    </h4>
+    <p>{{data['account'].AvailableCash | currency: data['account'].LocalCurrency}}</p>
+
+    <div class="holdings">
+      <div class="header">
+        <h3>Holdings</h3>
+        <mat-icon (click)="showHoldingsForm()" matTooltip="Add Holdings">add</mat-icon>
+      </div>
+      <div class="clearfix"></div>
+      
+      <div *ngIf="isHoldingsFormVisible">
+        <form [formGroup]="formGroup">
+          <mat-form-field>
+            <input type="text" placeholder="Choose investment" matInput formControlName="autocompleteInput" [matAutocomplete]="auto">
+            <mat-autocomplete #auto="matAutocomplete" (optionSelected)="setNewHoldings($event)">
+              <mat-option *ngFor="let option of filteredInvestments | async" [value]="option.InvestmentName">
+                {{option.InvestmentName}}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+          <mat-form-field>
+            <input type="text" placeholder="Units" matInput formControlName="unitsInput">
+          </mat-form-field>
+          <div fxFlexLayout="row">
+              
+            <button mat-raised-button color="primary" (click)="saveHoldings()">Save</button>
+          </div>
+        </form>
+      </div>
+
+      <div >
+        <mat-list>
+          <mat-list-item *ngFor="let holding of data['account']['Holdings']; last as last">
+            <div mat-line>
+              <strong>{{holding.InvestmentCode}}</strong>
+            </div>
+            <div mat-line>
+              Price: {{holding.Price}}
+            </div>
+            <div mat-line>
+              Units: {{holding.Units}}
+            </div>
+            <div mat-line>
+              {{holding.PurchaseDateUtc}}
+            </div>
+            <mat-divider [inset]="true" *ngIf="!last"></mat-divider>
+          </mat-list-item>
+        </mat-list>
+      </div>
+    </div>
   </div>
 </div>
