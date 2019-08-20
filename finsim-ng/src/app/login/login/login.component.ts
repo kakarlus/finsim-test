@@ -36,10 +36,10 @@ export class LoginComponent implements OnInit {
     return this.authnFormGroup.get('password');
   }
 
-  attemptLogin(loginForm: NgForm) {
+  attemptLogin() {
     this.isAttemptingLogin = true;
     this.loginError = null;
-    this.loginService.login(loginForm.value).subscribe(
+    this.loginService.login(this.authnFormGroup.value).subscribe(
       (res) => {
         this.loginService.setToken(res['access_token']);
         this.router.navigate(['investments']);

@@ -1,5 +1,5 @@
 <div class="login" fxLayout="row">
-  <form #loginForm="ngForm" [formGroup]="authnFormGroup" (ngSubmit)="attemptLogin(loginForm)"
+  <form [formGroup]="authnFormGroup" (ngSubmit)="attemptLogin()"
       fxLayout="column" fxLayoutAlign="space-around stretch" fxLayoutGap="20px"
       fxFlex.lt-sm="80" fxFlexOffset.lt-sm="10"
       fxFlex.sm="50" fxFlexOffset.sm="25"
