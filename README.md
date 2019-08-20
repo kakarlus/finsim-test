@@ -9,7 +9,7 @@
 
 #### Clone repo
 ```
-git checkout https://github.com/kakarlus/finsim-test.git
+git clone https://github.com/kakarlus/finsim-test.git
 ```
 
 #### Installation
