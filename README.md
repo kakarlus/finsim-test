@@ -4,7 +4,7 @@
  -- in folder **finsim-ng**
  - Frontend is running in node Express http://localhost:4100/
  -- in folder **app-fe**
- - Backend proxy is running in node Express http://localhost:4101/ to enable CORS 
+ - Backend proxy is running in node Express http://localhost:4101/ avoid browser and angular triggering CORS 
  -- in folder **app-proxy**
 
 #### Clone repo
@@ -21,7 +21,7 @@ npm i
 // build with angular cli
 ng b --prod
 
-// if you don't have angular cli installed globally
+// if you don't have angular cli installed globally (npx is available only for npm v6.6.0 and above)
 npx ng b --prod
 
 // express frontend host
