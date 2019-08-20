@@ -17,7 +17,12 @@ git clone https://github.com/kakarlus/finsim-test.git
 // Angular npm i and build
 cd finsim-ng
 npm i
+
+// build with angular cli
 ng b --prod
+
+// if you don't have angular cli installed globally
+npx ng b --prod
 
 // express frontend host
 cd ../app-fe
