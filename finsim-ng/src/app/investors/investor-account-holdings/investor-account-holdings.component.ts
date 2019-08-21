@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 import { FormControl, FormGroup } from '@angular/forms';
 import { startWith, map, tap } from 'rxjs/operators';
 import { InvestorsService } from 'src/app/services/investors/investors.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'investor-account-holdings',
@@ -28,7 +29,8 @@ export class InvestorAccountHoldingsDialog {
   constructor(public dialogRef: MatDialogRef<InvestorAccountHoldingsDialog>,
       @Inject(MAT_DIALOG_DATA) public data: Object, 
       private investmentsService: InvestmentsService,
-      private investorsService: InvestorsService) {
+      private investorsService: InvestorsService,
+      private toastNotification: MatSnackBar) {
     
     this.selectedInvestor = data['investor'];
     this.selectedAccount = data['account'];
@@ -91,7 +93,9 @@ export class InvestorAccountHoldingsDialog {
         console.log(res);
       },
       err => {
-        alert(err.error.Message);
+        this.toastNotification.open(err.error.Message, 'Close', {
+          duration: 3000
+        });
       }
     );
 

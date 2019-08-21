@@ -22,7 +22,7 @@ import { TokenInterceptorService } from '../services/token-interceptor.service';
 import { InvestmentsService } from '../services/investments/investments.service';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { ReactiveFormsModule } from '@angular/forms';
-
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 @NgModule({
   declarations: [
     InvestorsListComponent,
@@ -45,7 +45,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatProgressSpinnerModule,
     MatDividerModule,
     MatAutocompleteModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatSnackBarModule
   ],
   providers: [
     InvestmentsService,
