@@ -42,3 +42,7 @@ node index.js
 cd app-proxy
 node index.js
 ```
+
+#### Ready for viewing in browser
+
+open your browser and link enter url http://localhost:4100/
